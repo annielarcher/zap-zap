@@ -7,11 +7,8 @@ import InputLabel from "@material-ui/core/InputLabel";
 import Select from "@material-ui/core/Select";
 import FormHelperText from "@material-ui/core/FormHelperText";
 import TextField from "@material-ui/core/TextField";
-import Title from "../Title";
-import Paper from "@material-ui/core/Paper";
-import Typography from "@material-ui/core/Typography";
 import useSettings from "../../hooks/useSettings";
-import { ToastContainer, toast } from 'react-toastify';
+import { toast } from 'react-toastify';
 import { makeStyles } from "@material-ui/core/styles";
 import { grey, blue } from "@material-ui/core/colors";
 import { Tabs, Tab } from "@material-ui/core";
@@ -90,7 +87,6 @@ export default function Options(props) {
   const [loadingScheduleType, setLoadingScheduleType] = useState(false);
   const [loadingCallType, setLoadingCallType] = useState(false);
   const [loadingChatbotType, setLoadingChatbotType] = useState(false);
-  const [loadingCheckMsgIsGroup, setCheckMsgIsGroup] = useState(false);
 
 
   //const [ipixcType, setIpIxcType] = useState("");
@@ -139,20 +135,16 @@ export default function Options(props) {
       if (CheckMsgIsGroup) {
         setCheckMsgIsGroupType(CheckMsgIsGroup.value);
       }
-	  
-	  {/*PLW DESIGN SAUDAÇÃO*/}
+      // PLW DESIGN SAUDAÇÃO
       const SendGreetingAccepted = settings.find((s) => s.key === "sendGreetingAccepted");
       if (SendGreetingAccepted) {
         setSendGreetingAccepted(SendGreetingAccepted.value);
-      }	 
-	  {/*PLW DESIGN SAUDAÇÃO*/}	 
-	  
-	  {/*TRANSFERIR TICKET*/}	
+      }
+      // TRANSFERIR TICKET
 	  const SettingsTransfTicket = settings.find((s) => s.key === "sendMsgTransfTicket");
       if (SettingsTransfTicket) {
         setSettingsTransfTicket(SettingsTransfTicket.value);
       }
-	  {/*TRANSFERIR TICKET*/}
 
       const sendGreetingMessageOneQueues = settings.find((s) => s.key === "sendGreetingMessageOneQueues");
       if (sendGreetingMessageOneQueues) {
@@ -163,31 +155,12 @@ export default function Options(props) {
       if (chatbotType) {
         setChatbotType(chatbotType.value);
       }
-
-	    {/*const ipixcType = settings.find((s) => s.key === "ipixc");
-      if (ipixcType) {
-        setIpIxcType(ipixcType.value);
-      }*/}
-
-      {/*const tokenixcType = settings.find((s) => s.key === "tokenixc");
-      if (tokenixcType) {
-        setTokenIxcType(tokenixcType.value);
-      }*/}
-
-      {/*const ipmkauthType = settings.find((s) => s.key === "ipmkauth");
-      if (ipmkauthType) {
-        setIpMkauthType(ipmkauthType.value);
-      }*/}
-
-     {/* const clientidmkauthType = settings.find((s) => s.key === "clientidmkauth");
-      if (clientidmkauthType) {
-        setClientIdMkauthType(clientidmkauthType.value);
-      }*/}
-
-      {/*const clientsecretmkauthType = settings.find((s) => s.key === "clientsecretmkauth");
-      if (clientsecretmkauthType) {
-        setClientSecrectMkauthType(clientsecretmkauthType.value);
-      }*/}
+      // Commented out settings:
+      // const ipixcType = settings.find((s) => s.key === "ipixc");
+      // const tokenixcType = settings.find((s) => s.key === "tokenixc");
+      // const ipmkauthType = settings.find((s) => s.key === "ipmkauth");
+      // const clientidmkauthType = settings.find((s) => s.key === "clientidmkauth");
+      // const clientsecretmkauthType = settings.find((s) => s.key === "clientsecretmkauth");
 
       const asaasType = settings.find((s) => s.key === "asaas");
       if (asaasType) {
@@ -266,19 +239,17 @@ export default function Options(props) {
 
   async function handleGroupType(value) {
     setCheckMsgIsGroupType(value);
-    setCheckMsgIsGroup(true);
     await update({
       key: "CheckMsgIsGroup",
       value,
     });
     toast.success("Operação atualizada com sucesso.");
-    setCheckMsgIsGroupType(false);
     /*     if (typeof scheduleTypeChanged === "function") {
           scheduleTypeChanged(value);
         } */
   }
   
-  {/*NOVO CÓDIGO*/}  
+  // NOVO CÓDIGO
   async function handleSendGreetingAccepted(value) {
     setSendGreetingAccepted(value);
     setLoadingSendGreetingAccepted(true);
@@ -286,12 +257,9 @@ export default function Options(props) {
       key: "sendGreetingAccepted",
       value,
     });
-	toast.success("Operação atualizada com sucesso.");
+    toast.success("Operação atualizada com sucesso.");
     setLoadingSendGreetingAccepted(false);
-  }  
-  
-  
-  {/*NOVO CÓDIGO*/}    
+  }
 
   async function handleSettingsTransfTicket(value) {
     setSettingsTransfTicket(value);

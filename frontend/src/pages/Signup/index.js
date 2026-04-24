@@ -104,12 +104,16 @@ const SignUp = () => {
 	};
 
 	const [plans, setPlans] = useState([]);
-	const { list: listPlans } = usePlans();
+	const { getPlanList } = usePlans();
 
 	useEffect(() => {
 		async function fetchData() {
-			const list = await listPlans();
-			setPlans(list);
+			try {
+				const list = await getPlanList();
+				setPlans(list);
+			} catch (err) {
+				console.error("Erro ao carregar planos:", err);
+			}
 		}
 		fetchData();
 	}, []);
